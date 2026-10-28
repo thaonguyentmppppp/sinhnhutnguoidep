@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chúc Mừng Sinh Nhật Nguyễn Phụng Tiên 🐒🎂</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    .font-pacifico {
+      font-family: 'Pacifico', cursive;
+    }
+
+    .bg-magical {
+      background: radial-gradient(circle at 50% 15%, #ffe6f0 0%, #fff0f5 45%, #ffd6ea 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Bong bóng 3D */
+    .balloon-container {
+      position: absolute;
+      bottom: -130px;
+      pointer-events: auto;
+      cursor: pointer;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.25s ease-out;
+    }
+    .balloon-container:hover {
+      transform: scale(1.15);
+    }
+    .balloon-sphere {
+      width: 64px;
+      height: 80px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      position: relative;
+      box-shadow: inset -6px -8px 14px rgba(0,0,0,0.1), inset 5px 6px 14px rgba(255,255,255,0.8), 0 8px 20px rgba(255,140,180,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .balloon-sphere::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      width: 16px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      transform: rotate(-35deg);
+    }
+    .balloon-knot {
+      width: 10px;
+      height: 6px;
+      background: inherit;
+      border-radius: 3px;
+      margin-top: -3px;
+      filter: brightness(0.9);
+    }
+    .balloon-string {
+      width: 1.5px;
+      height: 60px;
+      background: rgba(180, 140, 160, 0.45);
+    }
+
+    .popping {
+      animation: popBurst 0.3s forwards !important;
+    }
+    @keyframes popBurst {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    /* Card hiệu ứng mờ */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 16px 40px rgba(255, 130, 170, 0.16);
+    }
+
+    /* BÁNH KEM 3D */
+    .cake-stage {
+      position: relative;
+      width: 320px;
+      height: 270px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+    .plate-3d {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, #ffe9f2 65%, #ffd1e4 100%);
+      box-shadow: 0 16px 30px rgba(255, 105, 160, 0.28), 0 6px 12px rgba(0, 0, 0, 0.08);
+      border: 3px solid #ffffff;
+    }
+    .plate-3d::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 14px;
+      right: 14px;
+      bottom: 6px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(255, 130, 180, 0.35);
+    }
+    .tier-bottom {
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 85px;
+    }
+    .tier-bottom-body {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 65px;
+      background: linear-gradient(180deg, #ff94ba 0%, #ff6f9f 50%, #e65487 100%);
+      border-radius: 0 0 110px 110px / 0 0 35px 35px;
+      box-shadow: inset 0 -6px 12px rgba(180, 20, 70, 0.25), inset 8px 0 12px rgba(255, 255, 255, 0.35), inset -8px 0 12px rgba(0, 0, 0, 0.12);
+    }
+    .tier-bottom-top {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 40% 40%, #ffe8f1 0%, #ffc0d7 55%, #ffa6c6 100%);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+    }
+    .drip-bottom {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      width: 100%;
+      height: 28px;
+      pointer-events: none;
+    }
+    .tier-top {
+      position: absolute;
+      bottom: 95px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 75px;
+    }
+    .tier-top-body {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 55px;
+      background: linear-gradient(180deg, #ffadc9 0%, #ff8cb5 50%, #f06e9c 100%);
+      border-radius: 0 0 75px 75px / 0 0 25px 25px;
+      box-shadow: inset 0 -4px 8px rgba(180, 20, 70, 0.2), inset 6px 0 8px rgba(255, 255, 255, 0.4), inset -6px 0 8px rgba(0, 0, 0, 0.1);
+    }
+    .tier-top-top {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 40% 40%, #ffffff 0%, #ffdfec 55%, #ffb8d3 100%);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .name-badge-3d {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ffffff 0%, #fff2f7 100%);
+      border: 1.5px solid #ff99be;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #d82b6b;
+      box-shadow: 0 4px 10px rgba(216, 43, 107, 0.25), inset 0 1px 2px #fff;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 5;
+    }
+    .candles-group {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 22px;
+      z-index: 10;
+    }
+    .candle-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .candle-flame-wrap {
+      height: 26px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .candle-flame {
+      width: 13px;
+      height: 24px;
+      background: radial-gradient(circle at 50% 75%, #ffffff 0%, #ffe600 25%, #ff5900 70%, transparent 100%);
+      border-radius: 50% 50% 25% 25% / 60% 60% 40% 40%;
+      box-shadow: 0 0 14px #ff9e00, 0 0 28px #ff4800, 0 -4px 12px rgba(255, 230, 0, 0.8);
+      animation: flameSway 1.2s infinite alternate ease-in-out;
+      transform-origin: bottom center;
+    }
+    @keyframes flameSway {
+      0% { transform: scale(1) rotate(-4deg); }
+      50% { transform: scale(1.08) rotate(2deg); }
+      100% { transform: scale(0.96) rotate(4deg); }
+    }
+    .flame-extinguished {
+      display: none !important;
+    }
+    .smoke {
+      position: absolute;
+      top: -10px;
+      width: 6px;
+      height: 18px;
+      background: rgba(180, 180, 180, 0.4);
+      border-radius: 50%;
+      filter: blur(2px);
+      animation: smokeRise 1.2s forwards ease-out;
+    }
+    @keyframes smokeRise {
+      0% { transform: translateY(0) scale(0.8); opacity: 0.8; }
+      100% { transform: translateY(-25px) scale(2.2); opacity: 0; }
+    }
+    .candle-wick-3d {
+      width: 2px;
+      height: 6px;
+      background: #2b2b2b;
+      border-radius: 1px;
+    }
+    .candle-cylinder {
+      width: 11px;
+      height: 38px;
+      border-radius: 3px 3px 2px 2px;
+      box-shadow: inset -2px 0 4px rgba(0,0,0,0.18), inset 2px 0 3px rgba(255,255,255,0.6);
+    }
+    .candle-yellow { background: repeating-linear-gradient(45deg, #ffd166, #ffd166 4px, #fff 4px, #fff 8px); }
+    .candle-pink   { background: repeating-linear-gradient(45deg, #ff6fa2, #ff6fa2 4px, #fff 4px, #fff 8px); height: 44px; }
+    .candle-purple { background: repeating-linear-gradient(45deg, #b392f0, #b392f0 4px, #fff 4px, #fff 8px); }
+
+    /* ========================================================
+       HỘP QUÀ MA THUẬT SVG CHUẨN XÁC 100% - KHÔNG BỊ LỆCH
+    ======================================================== */
+    .gift-scene-clean {
+      position: relative;
+      width: 200px;
+      height: 210px;
+      margin: 0 auto;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    
+    .gift-wobble-box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      animation: gentleFloat 3s infinite ease-in-out;
+    }
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Nắp hộp quà */
+    .gift-lid-box {
+      width: 168px;
+      height: 48px;
+      position: relative;
+      z-index: 20;
+      transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: top left;
+    }
+
+    /* Thân hộp quà */
+    .gift-body-box {
+      width: 150px;
+      height: 115px;
+      margin-top: -6px;
+      position: relative;
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+    .gift-scene-clean:hover .gift-body-box {
+      transform: scale(1.02);
+    }
+
+    /* Chú khỉ giấu trong hộp */
+    .hidden-monkey {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      opacity: 0;
+      z-index: 5;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Khi mở hộp */
+    .gift-scene-clean.is-opened .gift-lid-box {
+      transform: translate(-30px, -50px) rotate(-35deg) scale(1.05);
+    }
+    .gift-scene-clean.is-opened .hidden-monkey {
+      transform: translateX(-50%) translateY(-75px) scale(1.2);
+      opacity: 1;
+    }
+    .gift-scene-clean.is-opened .gift-wobble-box {
+      animation: none;
+    }
+
+    /* Thẻ cào */
+    .scratch-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(255, 110, 160, 0.2);
+    }
+    .scratch-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      z-index: 10;
+      touch-action: none;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .btn-candy {
+      background: linear-gradient(135deg, #ff6fa2, #ff8eb6);
+      box-shadow: 0 6px 18px rgba(255, 111, 162, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-candy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 22px rgba(255, 111, 162, 0.45);
+    }
+
+    .music-spin {
+      animation: musicRotate 4s linear infinite;
+    }
+    @keyframes musicRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-magical text-gray-700">
+
+  <!-- Pháo hoa toàn màn hình -->
+  <canvas id="fireworksCanvas" class="fixed inset-0 pointer-events-none z-50 w-full h-full"></canvas>
+
+  <!-- Lớp bong bóng bay -->
+  <div id="balloonLayer" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+  <!-- Nút Bật/Tắt Nhạc Hộp Kẹo Ngọt -->
+  <div class="fixed top-4 right-4 z-40">
+    <button id="musicToggleBtn" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-bold bg-white/95 text-pink-600 shadow-md border border-pink-200 hover:bg-pink-50 transition active:scale-95">
+      <span id="musicIcon" class="text-base">🔔</span>
+      <span id="musicStatusText">Nhạc: Đang Tắt</span>
+    </button>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 1. MÀN HÌNH ĐĂNG NHẬP VIP (ĐÃ ẨN MÃ VÉ) -->
+  <!-- ============================================== -->
+  <div id="loginScreen" class="fixed inset-0 z-30 flex items-center justify-center p-4">
+    <div class="glass-card max-w-sm w-full rounded-3xl p-7 text-center border-2 border-pink-200 relative shadow-2xl">
+      <div class="w-20 h-20 mx-auto mb-3 bg-gradient-to-tr from-pink-200 to-amber-100 rounded-full flex items-center justify-center shadow-inner relative animate-bounce">
+        <span class="text-4xl">🐒</span>
+        <span class="absolute -bottom-1 -right-1 text-xl">🍌</span>
+        <span class="absolute -top-1 -right-1 text-xl">👑</span>
+      </div>
+
+      <div class="inline-block px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-[11px] font-bold uppercase tracking-wider mb-2">
+        ✨ CỔNG BÍ MẬT VIP ✨
+      </div>
+      <h2 class="text-3xl font-extrabold text-pink-600 font-pacifico mb-1">Chào Nguyễn Phụng Tiên</h2>
+      <p class="text-xs text-pink-400 mb-6 font-semibold">Nhấn nút bên dưới để mở tiệc sinh nhật bùng nổ nhé!</p>
+
+      <form id="loginForm" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold text-pink-700 uppercase tracking-wider mb-1 ml-1">Nhân Vật Chính</label>
+          <div class="relative">
+            <input type="text" value="Nguyễn Phụng Tiên 🐒" readonly class="w-full px-4 py-3 bg-pink-50/80 border-2 border-pink-200 rounded-2xl text-pink-800 font-bold focus:outline-none cursor-not-allowed">
+            <span class="absolute right-4 top-3.5 text-pink-400 text-base">💖</span>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-2xl btn-candy text-white font-bold text-base shadow-lg flex items-center justify-center gap-2 group mt-2">
+          <span>Khám Phá Bữa Tiệc Nào!</span>
+          <span class="text-lg group-hover:scale-125 transition-transform">🎉</span>
+        </button>
+      </form>
+      <p class="text-[11px] text-pink-400 mt-4 italic font-medium">Bật loa để lắng nghe giai điệu sinh nhật nhé!</p>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 2. GIAO DIỆN CHÍNH -->
+  <!-- ============================================== -->
+  <main id="mainCelebration" class="hidden min-h-screen relative pb-20 pt-8 px-4 max-w-4xl mx-auto flex flex-col items-center">
+    
+    <!-- Tiêu đề Header -->
+    <header class="text-center mt-4 mb-7 w-full">
+      <div class="inline-flex items-center gap-2 px-4 py-1 bg-pink-100 text-pink-600 rounded-full font-bold text-xs uppercase tracking-widest shadow-sm mb-3">
+        <span>🎉 HAPPY BIRTHDAY 🐒</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-pink-600 tracking-wide mb-2 drop-shadow-sm">
+        Chúc Mừng Sinh Nhật
+      </h1>
+      <h2 class="text-4xl md:text-6xl font-pacifico text-pink-500 font-bold mb-3 flex items-center justify-center gap-2">
+        <span>Nguyễn Phụng Tiên</span>
+        <span class="text-3xl inline-block hover:rotate-12 transition-transform">🐒</span>
+      </h2>
+      <p class="text-xs md:text-sm text-pink-700/80 max-w-lg mx-auto font-medium">
+        Chúc mừng tuổi mới rực rỡ! Mong mỗi ngày của Tiên đều ngập tràn niềm vui, cười toe toét và luôn may mắn ngập tràn! 🌸✨
+      </p>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- KHU VỰC 1: BÁNH KEM 3D 2 TẦNG CHUẨN XỊN -->
+    <!-- ============================================== -->
+    <section class="glass-card w-full rounded-3xl p-6 md:p-8 mb-8 text-center relative overflow-hidden">
+      <h3 class="text-base md:text-lg font-bold text-pink-700 mb-6 flex items-center justify-center gap-2">
+        <span>🎂</span> Cùng Tiên Ước Nguyện & Thổi Nến Nhé! <span>✨</span>
+      </h3>
+
+      <div class="cake-stage select-none">
+        <div class="plate-3d"></div>
+
+        <!-- TẦNG 1 -->
+        <div class="tier-bottom">
+          <div class="tier-bottom-body"></div>
+          <svg class="drip-bottom" viewBox="0 0 220 28" fill="none">
+            <path d="M0,8 C15,8 20,24 35,24 C50,24 55,10 70,10 C85,10 90,26 105,26 C120,26 125,12 140,12 C155,12 160,25 175,25 C190,25 195,10 220,10 L220,0 L0,0 Z" fill="#ffffff" opacity="0.92"/>
+          </svg>
+          <div class="tier-bottom-top"></div>
+
+          <div class="name-badge-3d">
+            <span>🍓</span>
+            <span>PHỤNG TIÊN</span>
+            <span>💖</span>
+          </div>
+        </div>
+
+        <!-- TẦNG 2 -->
+        <div class="tier-top">
+          <div class="tier-top-body"></div>
+          <svg class="drip-bottom" viewBox="0 0 150 24" fill="none">
+            <path d="M0,6 C12,6 16,18 28,18 C40,18 45,8 58,8 C70,8 75,20 88,20 C100,20 105,9 118,9 C130,9 135,17 150,17 L150,0 L0,0 Z" fill="#ffffff" opacity="0.95"/>
+          </svg>
+          <div class="tier-top-top"></div>
+        </div>
+
+        <!-- 3 CÂY NẾN 3D -->
+        <div class="candles-group">
+          <div class="candle-item">
+            <div class="candle-flame-wrap">
+              <div id="flame1" class="candle-flame"></div>
+            </div>
+            <div class="candle-wick-3d"></div>
+            <div class="candle-cylinder candle-yellow"></div>
+          </div>
+
+          <div class="candle-item -mt-2">
+            <div class="candle-flame-wrap">
+              <div id="flame2" class="candle-flame"></div>
+            </div>
+            <div class="candle-wick-3d"></div>
+            <div class="candle-cylinder candle-pink"></div>
+          </div>
+
+          <div class="candle-item">
+            <div class="candle-flame-wrap">
+              <div id="flame3" class="candle-flame"></div>
+            </div>
+            <div class="candle-wick-3d"></div>
+            <div class="candle-cylinder candle-purple"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <button id="blowCandleBtn" class="btn-candy text-white px-7 py-3 rounded-full font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition flex items-center gap-2 mx-auto">
+          <span id="candleBtnIcon">💨</span>
+          <span id="candleBtnText">Ước Nguyện & Thổi Nến Nào!</span>
+        </button>
+        <p id="candleWishText" class="text-xs font-bold text-pink-600 mt-3 hidden animate-fade-in">
+          ✨ Ước mơ đã được gửi lên vũ trụ! Mong mọi điều tốt lành nhất sẽ thành hiện thực với Phụng Tiên! 💖
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- KHU VỰC 2: HỘP QUÀ MA THUẬT SVG CHUẨN XỊN -->
+    <!-- ============================================== -->
+    <section class="glass-card w-full rounded-3xl p-6 md:p-8 mb-8 text-center relative">
+      <div class="inline-block px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold mb-2 uppercase tracking-wider">
+        🎁 MAGIC GIFT BOX 🎁
+      </div>
+      <h3 class="text-xl md:text-2xl font-bold text-pink-700 mb-1">Mở Hộp Quà May Mắn Của Tiên</h3>
+      <p class="text-xs text-pink-500 mb-6 font-medium">Chạm vào hộp quà để khám phá bất ngờ nhé!</p>
+
+      <!-- KHUNG HỘP QUÀ SVG ĐƯỢC CĂN CHUẨN XÁC TUYỆT ĐỐI -->
+      <div id="magicGiftWrapper" class="gift-scene-clean">
+        <!-- Chú khỉ giấu bên trong -->
+        <div class="hidden-monkey">
+          <div class="text-5xl filter drop-shadow animate-bounce">🐒</div>
+          <span class="text-[11px] font-extrabold bg-pink-100 text-pink-700 px-3 py-0.5 rounded-full shadow border border-pink-300 mt-1">HBD Tiên! 💖</span>
+        </div>
+
+        <div class="gift-wobble-box">
+          <!-- Nắp Hộp Quà (Vẽ SVG sắc nét kèm Nơ Bướm) -->
+          <div class="gift-lid-box">
+            <svg viewBox="0 0 168 48" class="w-full h-full filter drop-shadow-md">
+              <defs>
+                <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffa3c4"/>
+                  <stop offset="60%" stop-color="#ff6596"/>
+                  <stop offset="100%" stop-color="#ee3873"/>
+                </linearGradient>
+                <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ffe680"/>
+                  <stop offset="50%" stop-color="#ffd166"/>
+                  <stop offset="100%" stop-color="#fca311"/>
+                </linearGradient>
+              </defs>
+              <!-- Nắp chính -->
+              <rect x="2" y="16" width="164" height="30" rx="14" fill="url(#lidGrad)" stroke="#ffffff" stroke-width="2.5"/>
+              <!-- Ruy băng ngang nắp -->
+              <rect x="68" y="16" width="32" height="30" fill="url(#ribbonGrad)"/>
+              
+              <!-- Nơ Bướm 3D -->
+              <!-- Cánh nơ trái -->
+              <path d="M72,16 C50,0 52,14 74,16 Z" fill="url(#ribbonGrad)" stroke="#ffffff" stroke-width="1.5"/>
+              <!-- Cánh nơ phải -->
+              <path d="M96,16 C118,0 116,14 94,16 Z" fill="url(#ribbonGrad)" stroke="#ffffff" stroke-width="1.5"/>
+              <!-- Nút thắt nơ tròn -->
+              <circle cx="84" cy="16" r="8" fill="#ffd166" stroke="#ffffff" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <!-- Thân Hộp Quà (Vẽ SVG kèm Tag tên) -->
+          <div class="gift-body-box">
+            <svg viewBox="0 0 150 115" class="w-full h-full filter drop-shadow-lg">
+              <defs>
+                <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff7fae"/>
+                  <stop offset="60%" stop-color="#ff4d85"/>
+                  <stop offset="100%" stop-color="#d92461"/>
+                </linearGradient>
+              </defs>
+              <!-- Thân hộp bo tròn -->
+              <rect x="3" y="0" width="144" height="110" rx="22" fill="url(#boxGrad)" stroke="#ffffff" stroke-width="2.5"/>
+              <!-- Dải ruy băng dọc -->
+              <rect x="59" y="0" width="32" height="110" fill="url(#ribbonGrad)"/>
+              <!-- Dải ruy băng ngang -->
+              <rect x="3" y="42" width="144" height="26" fill="url(#ribbonGrad)"/>
+            </svg>
+
+            <!-- Tag tên To: Phụng Tiên 🐒 -->
+            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white px-3 py-0.5 rounded-full shadow border border-pink-200 text-pink-600 font-bold text-[11px] whitespace-nowrap flex items-center gap-1 z-20">
+              <span>To: Phụng Tiên</span>
+              <span>🐒</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p id="giftNoticeText" class="text-xs font-bold text-pink-600 mt-5">
+        👉 Hãy nhấp vào hộp quà để mở tấm Vé Cào May Mắn!
+      </p>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- KHU VỰC 3: PHIẾU CÀO VOUCHER (MỞ HỘP QUÀ MỚI HIỆN) -->
+    <!-- ============================================== -->
+    <section id="voucherSection" class="hidden glass-card w-full rounded-3xl p-6 md:p-8 mb-8 text-center relative border-2 border-pink-300">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="text-xl">🎟️</span>
+        <h3 class="text-xl md:text-2xl font-bold text-pink-700">Phiếu Cào May Mắn Sinh Nhật</h3>
+        <span class="text-xl">🎟️</span>
+      </div>
+      <p class="text-xs text-pink-500 mb-5 font-medium">
+        Dùng chuột hoặc vuốt ngón tay cào sạch lớp tráng nhũ hồng để mở phần thưởng nhé!
+      </p>
+
+      <div class="max-w-md mx-auto scratch-wrapper bg-white border-2 border-pink-200 p-5 relative">
+        <div id="voucherUnderlay" class="min-h-[160px] flex flex-col justify-center items-center text-center p-2">
+          <span class="text-[11px] font-bold tracking-widest text-pink-400 uppercase mb-1">ĐẶC QUYỀN DÀNH RIÊNG CHO TIÊN</span>
+          <h4 id="voucherTitle" class="text-lg md:text-xl font-black text-pink-600 mb-2">VOUCHER TRÀ SỮA 🧋</h4>
+          <p id="voucherDesc" class="text-xs md:text-sm font-semibold text-gray-700 leading-relaxed px-2">
+            Chúc mừng bạn! Bạn đã trúng một chầu trà sữa thơm ngon. Hôm nay cứ chọn vị mình thích nhé!
+          </p>
+          <div class="mt-4 pt-2.5 border-t border-dashed border-pink-200 w-full flex justify-between text-[10px] font-bold text-pink-400">
+            <span>Mã: HBD-TIEN-2026</span>
+            <span class="text-pink-500">100% Trúng Thưởng 💖</span>
+          </div>
+        </div>
+
+        <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 mt-5">
+        <button id="quickScratchBtn" class="px-4 py-2 rounded-full text-xs font-bold bg-pink-100 text-pink-600 hover:bg-pink-200 transition active:scale-95 shadow-sm">
+          ✨ Cào Nhanh
+        </button>
+        <button id="changeVoucherBtn" class="px-4 py-2 rounded-full text-xs font-bold bg-gray-800 text-white hover:bg-black transition active:scale-95 shadow-sm">
+          🔄 Đổi Voucher Quà Mới
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- KHU VỰC 4: LỜI CHÚC YÊU THƯƠNG -->
+    <!-- ============================================== -->
+    <section class="glass-card w-full rounded-3xl p-6 md:p-8 mb-6 text-center">
+      <div class="inline-block px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-xs font-bold mb-2 uppercase tracking-wider">
+        💌 Hộp Thư Yêu Thương 💌
+      </div>
+      <h3 class="text-xl md:text-2xl font-bold text-pink-700 mb-1">Những Lời Chúc Gửi Tới Nguyễn Phụng Tiên</h3>
+      <p class="text-xs text-pink-400 mb-6 font-medium">Mỗi lời chúc là một viên kẹo ngọt ngào gửi gắm đến Tiên</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+        <div class="bg-white/80 rounded-2xl p-4 border border-pink-200 shadow-sm">
+          <div class="text-2xl mb-2">🌸</div>
+          <h4 class="font-bold text-pink-600 text-sm mb-1.5">Xinh Đẹp & Rạng Ngời</h4>
+          <p class="text-[11px] text-gray-600 leading-relaxed font-medium">
+            "Chúc Tiên của mình luôn xinh đẹp, rạng rỡ và hạnh phúc mỗi ngày. Mong nụ cười ấy sẽ luôn nở trên môi, đôi mắt lúc nào cũng lấp lánh niềm vui. Dù cuộc sống có đôi lúc mệt mỏi, mong Tiên vẫn luôn được yêu thương, chiều chuộng và trân trọng như một điều quý giá nhất. 💕"
+          </p>
+        </div>
+
+        <div class="bg-white/80 rounded-2xl p-4 border border-pink-200 shadow-sm">
+          <div class="text-2xl mb-2">✨</div>
+          <h4 class="font-bold text-pink-600 text-sm mb-1.5">Vạn Sự Như Ý</h4>
+          <p class="text-[11px] text-gray-600 leading-relaxed font-medium">
+            "Chúc mọi điều tốt đẹp nhất sẽ đến với Tiên. Mong những ước mơ trong lòng cậu đều có ngày trở thành hiện thực, con đường phía trước luôn có ánh sáng dẫn lối và những cố gắng của cậu đều được đền đáp xứng đáng. Nếu có ngày cảm thấy mệt mỏi, hãy nhớ rằng cậu luôn xứng đáng với những điều dịu dàng nhất trên thế gian này. 🥰"
+          </p>
+        </div>
+
+        <div class="bg-white/80 rounded-2xl p-4 border border-pink-200 shadow-sm">
+          <div class="text-2xl mb-2">🧸</div>
+          <h4 class="font-bold text-pink-600 text-sm mb-1.5">Bình An & Yêu Thương</h4>
+          <p class="text-[11px] text-gray-600 leading-relaxed font-medium">
+            "Mong Tiên luôn bình an, không phải suy nghĩ quá nhiều, không phải giấu những nỗi buồn sau nụ cười. Mong cậu gặp được thật nhiều người chân thành, nhận được thật nhiều yêu thương và mỗi ngày đều có một lý do để mỉm cười. 🍀"
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-pink-50 via-rose-50 to-pink-50 border border-pink-200 text-center">
+        <span class="text-xs font-bold text-pink-500 uppercase tracking-wider block mb-1.5">💌 LỜI NHẮN TỪ TRÁI TIM 🌷</span>
+        <p class="text-xs md:text-sm text-gray-700 italic font-semibold max-w-xl mx-auto leading-relaxed">
+          "Chúc Tiên luôn hạnh phúc, không chỉ hôm nay mà còn thật nhiều ngày sau nữa. Mong thế giới sẽ dịu dàng với cậu, mong những điều cậu mong chờ đều sẽ đến, và mong nụ cười của cậu sẽ luôn được gìn giữ bằng thật nhiều yêu thương. Cậu xứng đáng với tất cả những điều đẹp đẽ nhất. ✨🌷"
+        </p>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-pink-500 font-bold mt-2 pb-10">
+      Háp bì bệt đê tú du người đẹp 💖🍓
+    </footer>
+  </main>
+
+  <!-- ============================================== -->
+  <!-- SCRIPT LOGIC JAVASCRIPT -->
+  <!-- ============================================== -->
+  <script>
+    // 50 VOUCHER NGẪU NHIÊN
+    const voucherList = [
+      { title: "VOUCHER TRÀ SỮA 🧋", desc: "Chúc mừng bạn! Bạn đã trúng một chầu trà sữa thơm ngon. Hôm nay cứ chọn vị mình thích nhé!" },
+      { title: "VOUCHER ĐỒ NƯỚNG 🍖", desc: "Xin chúc mừng! Bạn nhận được một chầu đồ nướng nóng hổi, ăn ngon và vui vẻ hết mình." },
+      { title: "VOUCHER ĂN LẨU 🍲", desc: "Chúc mừng bạn! Một nồi lẩu nghi ngút khói đang chờ bạn thưởng thức." },
+      { title: "VOUCHER MỘT BÓ HOA 💐", desc: "Bạn đã trúng một bó hoa xinh xắn, gửi tặng bạn cùng những lời chúc tốt đẹp nhất." },
+      { title: "VOUCHER MÓN QUÀ BÍ MẬT 🎁", desc: "Phần thưởng của bạn là một món quà bất ngờ. Bí mật sẽ được bật mí sau nhé!" },
+      { title: "VOUCHER CÀ PHÊ ☕", desc: "Bạn nhận được một buổi cà phê thư giãn, chọn quán và thức uống mình yêu thích." },
+      { title: "VOUCHER GÀ RÁN 🍗", desc: "Chúc mừng! Một phần gà rán giòn rụm đang chờ chủ nhân đến nhận." },
+      { title: "VOUCHER BUFFET 🍣", desc: "Bạn đã trúng một bữa buffet thịnh soạn. Hãy chuẩn bị một chiếc bụng thật đói!" },
+      { title: "VOUCHER PIZZA 🍕", desc: "Phần thưởng hôm nay là một chiếc pizza thơm ngon, nóng hổi." },
+      { title: "VOUCHER BÁNH KEM 🎂", desc: "Một chiếc bánh kem ngọt ngào dành tặng bạn trong dịp đặc biệt này." },
+      { title: "VOUCHER ĂN VẶT 🥨", desc: "Bạn nhận được một phần ăn vặt tùy chọn. Thích món gì thì chọn món đó nhé!" },
+      { title: "VOUCHER SINH TỐ 🥤", desc: "Một ly sinh tố mát lạnh sẽ giúp ngày hôm nay thêm ngọt ngào." },
+      { title: "VOUCHER KEM 🍦", desc: "Chúc mừng! Bạn được thưởng thức một phần kem yêu thích." },
+      { title: "VOUCHER BÁNH NGỌT 🍰", desc: "Một phần bánh ngọt xinh xắn dành riêng cho người may mắn hôm nay." },
+      { title: "VOUCHER SUSHI 🍱", desc: "Bạn đã trúng một phần sushi hấp dẫn. Chúc bạn ăn ngon miệng!" },
+      { title: "VOUCHER LẨU TOKBOKKI 🥘", desc: "Một chầu tokbokki nóng hổi, cay cay và ngon lành đang đợi bạn." },
+      { title: "VOUCHER MÌ CAY 🍜", desc: "Thử thách vị giác với một tô mì cay theo cấp độ bạn lựa chọn." },
+      { title: "VOUCHER GÀ NƯỚNG 🔥", desc: "Một phần gà nướng thơm lừng dành tặng bạn. Ăn ngon nhé!" },
+      { title: "VOUCHER HẢI SẢN 🦐", desc: "Bạn đã trúng một bữa hải sản hấp dẫn. Hôm nay tha hồ thưởng thức!" },
+      { title: "VOUCHER CHÈ NGỌT 🍧", desc: "Một phần chè ngọt mát dành cho bạn, mong mọi điều trong ngày đều ngọt ngào như thế." },
+      { title: "VOUCHER MỘT MÓN QUÀ XINH 🎀", desc: "Bạn sẽ nhận được một món quà nhỏ được lựa chọn dành riêng cho mình." },
+      { title: "VOUCHER GẤU BÔNG 🧸", desc: "Chúc mừng! Một bé gấu bông đáng yêu đang chờ bạn rước về." },
+      { title: "VOUCHER MÓC KHÓA 🎀", desc: "Một chiếc móc khóa xinh xắn dành tặng bạn làm kỷ niệm." },
+      { title: "VOUCHER NƯỚC HOA 🌸", desc: "Bạn đã trúng một món quà thơm ngát, giúp mỗi ngày thêm tự tin và rạng rỡ." },
+      { title: "VOUCHER MỸ PHẨM 💄", desc: "Một món đồ làm đẹp nho nhỏ dành tặng bạn. Hãy luôn tự tin và tỏa sáng!" },
+      { title: "VOUCHER GẤU BÔNG MINI 🧸", desc: "Phần thưởng nhỏ xinh nhưng chứa đầy sự dễ thương. Chúc bạn nhận quà vui vẻ!" },
+      { title: "VOUCHER MỘT CHIẾC ÁO 👕", desc: "Bạn được chọn một món đồ mặc yêu thích trong phạm vi phần thưởng." },
+      { title: "VOUCHER PHỤ KIỆN XINH ✨", desc: "Một món phụ kiện dễ thương dành riêng cho bạn." },
+      { title: "VOUCHER SÁCH HAY 📚", desc: "Bạn nhận được một cuốn sách tùy chọn, chúc bạn có thêm nhiều điều thú vị để khám phá." },
+      { title: "VOUCHER ĐỒ DÙNG YÊU THÍCH 🎁", desc: "Bạn được chọn một món đồ nhỏ mà mình đang thích." },
+      { title: "VOUCHER ĐI XEM PHIM 🎬", desc: "Một buổi xem phim thư giãn cùng bắp rang và nước uống đang chờ bạn." },
+      { title: "VOUCHER ĐI CHƠI 🎡", desc: "Bạn đã trúng một buổi đi chơi vui vẻ. Hãy chọn địa điểm mình muốn đến!" },
+      { title: "VOUCHER KARAOKE 🎤", desc: "Một buổi karaoke thỏa thích, hát hay không bằng hát vui!" },
+      { title: "VOUCHER CHỤP ẢNH 📸", desc: "Một buổi chụp ảnh lưu giữ những khoảnh khắc thật đẹp dành cho bạn." },
+      { title: "VOUCHER ĐI DẠO 🌷", desc: "Bạn nhận được một buổi đi dạo thư giãn, tận hưởng không khí trong lành." },
+      { title: "VOUCHER MỘT CHUYẾN ĐI NHỎ 🛵", desc: "Một chuyến đi chơi ngắn ngày để đổi gió và tạo thêm kỷ niệm đẹp." },
+      { title: "VOUCHER TIỆM BÁNH 🥐", desc: "Bạn được chọn những chiếc bánh yêu thích tại một tiệm bánh." },
+      { title: "VOUCHER MỘT BỮA SÁNG 🍳", desc: "Một bữa sáng ngon miệng để bắt đầu ngày mới thật nhiều năng lượng." },
+      { title: "VOUCHER ĂN KHUYA 🌙", desc: "Một phần ăn khuya tùy chọn. Đêm nay cứ thưởng thức món ngon nhé!" },
+      { title: "VOUCHER TRÁI CÂY 🍓", desc: "Một phần trái cây tươi ngon, vừa ngọt ngào vừa đầy màu sắc dành tặng bạn." },
+      { title: "VOUCHER TRÀ ĐÀO 🍑", desc: "Một ly trà đào thơm ngon, mát lạnh dành riêng cho người trúng thưởng." },
+      { title: "VOUCHER MATCHA 🍵", desc: "Bạn nhận được một ly matcha yêu thích, chúc ngày hôm nay thật dịu dàng." },
+      { title: "VOUCHER CHOCOLATE 🍫", desc: "Một món quà chocolate ngọt ngào, gửi gắm lời chúc vui vẻ và hạnh phúc." },
+      { title: "VOUCHER BÓ HOA MINI 🌹", desc: "Một bó hoa nhỏ xinh dành tặng bạn, mong mỗi ngày đều có điều khiến bạn mỉm cười." },
+      { title: "VOUCHER HOA SÁP 💐", desc: "Bạn đã trúng một bó hoa sáp xinh xắn để lưu giữ làm kỷ niệm." },
+      { title: "VOUCHER HỘP QUÀ BẤT NGỜ 🎁", desc: "Không biết bên trong là gì, chỉ biết bạn chắc chắn có quà!" },
+      { title: "VOUCHER TỰ CHỌN MÓN ĂN 🍱", desc: "Bạn có quyền chọn một món ăn mình thích trong phạm vi phần thưởng. Hôm nay bạn là người quyết định!" },
+      { title: "VOUCHER TỰ CHỌN QUÀ 🎀", desc: "Một món quà theo sở thích của bạn đang chờ được lựa chọn. Hãy chọn món khiến mình vui nhất!" },
+      { title: "VOUCHER ĐẶC BIỆT ✨", desc: "Bạn đã trúng một phần thưởng đặc biệt. Giá trị phần thưởng sẽ được bật mí khi nhận quà!" },
+      { title: "VOUCHER JACKPOT MAY MẮN 🎉", desc: "Chúc mừng người may mắn nhất! Bạn được nhận một phần quà bất ngờ đặc biệt. Hãy chờ đón nhé" }
+    ];
+
+    // ÂM THANH HỘP KẸO NGỌT CELESTA
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicInterval = null;
+
+    function getAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playBubblePopSound() {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(540, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.12);
+      } catch (e) {}
+    }
+
+    const birthdayNotes = [
+      { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.35 }, { f: 293.66, d: 0.7 }, { f: 261.63, d: 0.7 },
+      { f: 349.23, d: 0.7 },  { f: 329.63, d: 1.4 },
+      { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.35 }, { f: 293.66, d: 0.7 }, { f: 261.63, d: 0.7 },
+      { f: 392.00, d: 0.7 },  { f: 349.23, d: 1.4 },
+      { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.35 }, { f: 523.25, d: 0.7 }, { f: 440.00, d: 0.7 },
+      { f: 349.23, d: 0.7 },  { f: 329.63, d: 0.7 },  { f: 293.66, d: 1.2 },
+      { f: 466.16, d: 0.35 }, { f: 466.16, d: 0.35 }, { f: 440.00, d: 0.7 }, { f: 349.23, d: 0.7 },
+      { f: 392.00, d: 0.7 },  { f: 349.23, d: 1.6 }
+    ];
+
+    function playMusicBoxNote(freq, dur) {
+      if (!isMusicPlaying) return;
+      try {
+        const ctx = getAudioContext();
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(freq * 2, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + Math.max(dur, 0.8));
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc1.start();
+        osc2.start();
+        osc1.stop(ctx.currentTime + Math.max(dur, 0.8));
+        osc2.stop(ctx.currentTime + Math.max(dur, 0.8));
+      } catch (e) {}
+    }
+
+    function startMusicBox() {
+      if (isMusicPlaying) return;
+      isMusicPlaying = true;
+      document.getElementById('musicStatusText').innerText = "Hộp Nhạc Kẹo Ngọt 🔔";
+      document.getElementById('musicIcon').classList.add('music-spin');
+
+      let noteIdx = 0;
+      function scheduleNext() {
+        if (!isMusicPlaying) return;
+        const cur = birthdayNotes[noteIdx];
+        playMusicBoxNote(cur.f, cur.d);
+        noteIdx = (noteIdx + 1) % birthdayNotes.length;
+        musicInterval = setTimeout(scheduleNext, cur.d * 850);
+      }
+      scheduleNext();
+    }
+
+    function stopMusicBox() {
+      isMusicPlaying = false;
+      if (musicInterval) clearTimeout(musicInterval);
+      document.getElementById('musicStatusText').innerText = "Nhạc: Đang Tắt";
+      document.getElementById('musicIcon').classList.remove('music-spin');
+    }
+
+    document.getElementById('musicToggleBtn').addEventListener('click', () => {
+      getAudioContext();
+      if (isMusicPlaying) stopMusicBox();
+      else startMusicBox();
+    });
+
+    // BONG BÓNG BAY TỰ DO
+    const balloonLayer = document.getElementById('balloonLayer');
+    const balloonColors = [
+      'radial-gradient(circle at 35% 30%, #ffcbe3, #ff8eb8 70%, #f46a9b 100%)',
+      'radial-gradient(circle at 35% 30%, #ffe9b8, #ffd166 70%, #fca311 100%)',
+      'radial-gradient(circle at 35% 30%, #e2d4fd, #c3a5fc 70%, #9d71f7 100%)',
+      'radial-gradient(circle at 35% 30%, #cbf3f0, #73e2d5 70%, #2ec4b6 100%)'
+    ];
+    const balloonIcons = ['🐒', '🍌', '💖', '🌸', '🍓', '✨'];
+
+    function createFloatingBalloon() {
+      const bContainer = document.createElement('div');
+      bContainer.className = 'balloon-container';
+
+      const sphere = document.createElement('div');
+      sphere.className = 'balloon-sphere';
+      sphere.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+
+      const icon = document.createElement('span');
+      icon.className = 'text-lg select-none';
+      icon.innerText = balloonIcons[Math.floor(Math.random() * balloonIcons.length)];
+      sphere.appendChild(icon);
+
+      const knot = document.createElement('div');
+      knot.className = 'balloon-knot';
+
+      const str = document.createElement('div');
+      str.className = 'balloon-string';
+
+      bContainer.appendChild(sphere);
+      bContainer.appendChild(knot);
+      bContainer.appendChild(str);
+
+      bContainer.style.left = (Math.random() * 92) + 'vw';
+      const duration = 8 + Math.random() * 8;
+      bContainer.style.transition = `bottom ${duration}s linear, transform 0.25s ease`;
+
+      bContainer.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        playBubblePopSound();
+        bContainer.classList.add('popping');
+        confetti({
+          particleCount: 15,
+          spread: 40,
+          origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+        });
+        setTimeout(() => bContainer.remove(), 260);
+      });
+
+      balloonLayer.appendChild(bContainer);
+      requestAnimationFrame(() => { bContainer.style.bottom = '120vh'; });
+      setTimeout(() => { if (bContainer.parentNode) bContainer.remove(); }, duration * 1000);
+    }
+
+    setInterval(createFloatingBalloon, 1500);
+    for (let i = 0; i < 4; i++) setTimeout(createFloatingBalloon, i * 400);
+
+    // PHÁO HOA CANVAS
+    const fCanvas = document.getElementById('fireworksCanvas');
+    const fCtx = fCanvas.getContext('2d');
+    let fwParticles = [];
+
+    function resizeFireworksCanvas() {
+      fCanvas.width = window.innerWidth;
+      fCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFireworksCanvas);
+    resizeFireworksCanvas();
+
+    class FWParticle {
+      constructor(x, y, color) {
+        this.x = x; this.y = y; this.color = color;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 5;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha = 1;
+        this.decay = 0.015 + Math.random() * 0.02;
+        this.size = 2.5 + Math.random() * 2;
+      }
+      update() {
+        this.vx *= 0.98; this.vy *= 0.98; this.vy += 0.07;
+        this.x += this.vx; this.y += this.vy; this.alpha -= this.decay;
+      }
+      draw() {
+        fCtx.save();
+        fCtx.globalAlpha = Math.max(0, this.alpha);
+        fCtx.fillStyle = this.color;
+        fCtx.beginPath();
+        fCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        fCtx.fill();
+        fCtx.restore();
+      }
+    }
+
+    function createFireworkBurst(x, y) {
+      const colors = ['#ff599c', '#ffea00', '#00f0ff', '#ff8a00', '#b5179e'];
+      const chosen = colors[Math.floor(Math.random() * colors.length)];
+      for (let i = 0; i < 50; i++) fwParticles.push(new FWParticle(x, y, chosen));
+    }
+
+    function animateFireworks() {
+      fCtx.clearRect(0, 0, fCanvas.width, fCanvas.height);
+      for (let i = fwParticles.length - 1; i >= 0; i--) {
+        const p = fwParticles[i];
+        p.update();
+        p.draw();
+        if (p.alpha <= 0) fwParticles.splice(i, 1);
+      }
+      requestAnimationFrame(animateFireworks);
+    }
+    animateFireworks();
+
+    function triggerGrandFireworks() {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          createFireworkBurst(
+            fCanvas.width * (0.2 + Math.random() * 0.6),
+            fCanvas.height * (0.15 + Math.random() * 0.45)
+          );
+        }, i * 280);
+      }
+      confetti({ particleCount: 80, spread: 75, origin: { y: 0.6 } });
+    }
+
+    // ĐĂNG NHẬP VIP
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      getAudioContext();
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('mainCelebration').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      startMusicBox();
+      triggerGrandFireworks();
+    });
+
+    // TƯƠNG TÁC THỔI NẾN 3D
+    const blowCandleBtn = document.getElementById('blowCandleBtn');
+    let candlesExtinguished = false;
+
+    function addSmokePuff(flameEl) {
+      const parent = flameEl.parentElement;
+      const smoke = document.createElement('div');
+      smoke.className = 'smoke';
+      parent.appendChild(smoke);
+      setTimeout(() => smoke.remove(), 1200);
+    }
+
+    blowCandleBtn.addEventListener('click', () => {
+      const f1 = document.getElementById('flame1');
+      const f2 = document.getElementById('flame2');
+      const f3 = document.getElementById('flame3');
+
+      if (candlesExtinguished) {
+        f1.classList.remove('flame-extinguished');
+        f2.classList.remove('flame-extinguished');
+        f3.classList.remove('flame-extinguished');
+        document.getElementById('candleBtnIcon').innerText = '💨';
+        document.getElementById('candleBtnText').innerText = 'Ước Nguyện & Thổi Nến Nào!';
+        document.getElementById('candleWishText').classList.add('hidden');
+        candlesExtinguished = false;
+        return;
+      }
+
+      f1.classList.add('flame-extinguished');
+      f2.classList.add('flame-extinguished');
+      f3.classList.add('flame-extinguished');
+      addSmokePuff(f1);
+      addSmokePuff(f2);
+      addSmokePuff(f3);
+
+      document.getElementById('candleBtnIcon').innerText = '🕯️';
+      document.getElementById('candleBtnText').innerText = 'Thắp Sáng Lại Ngọn Nến';
+      document.getElementById('candleWishText').classList.remove('hidden');
+      candlesExtinguished = true;
+      triggerGrandFireworks();
+    });
+
+    // MỞ HỘP QUÀ MA THUẬT SVG
+    const magicGiftWrapper = document.getElementById('magicGiftWrapper');
+    let giftOpened = false;
+
+    magicGiftWrapper.addEventListener('click', () => {
+      if (giftOpened) return;
+      giftOpened = true;
+      magicGiftWrapper.classList.add('is-opened');
+      playBubblePopSound();
+
+      // Hiện phần voucher
+      const voucherSec = document.getElementById('voucherSection');
+      voucherSec.classList.remove('hidden');
+      initScratchCard();
+
+      // Bung bong bóng & hoa giấy tung tóe
+      for (let i = 0; i < 9; i++) setTimeout(createFloatingBalloon, i * 130);
+      confetti({ particleCount: 75, spread: 85, origin: { y: 0.65 } });
+
+      document.getElementById('giftNoticeText').innerText = "🎉 Aww bé khỉ đã xuất hiện! Hãy cào thẻ quà bên dưới nha! 👇";
+
+      setTimeout(() => {
+        voucherSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    });
+
+    // VÉ CÀO CANVAS
+    const sCanvas = document.getElementById('scratchCanvas');
+    const sCtx = sCanvas.getContext('2d');
+    let isDrawing = false;
+    let isRevealed = false;
+
+    function pickRandomVoucher() {
+      const item = voucherList[Math.floor(Math.random() * voucherList.length)];
+      document.getElementById('voucherTitle').innerText = item.title;
+      document.getElementById('voucherDesc').innerText = item.desc;
+    }
+
+    function initScratchCard() {
+      isRevealed = false;
+      sCanvas.width = sCanvas.offsetWidth || 360;
+      sCanvas.height = sCanvas.offsetHeight || 165;
+      sCanvas.style.opacity = '1';
+      sCanvas.style.pointerEvents = 'auto';
+
+      const grad = sCtx.createLinearGradient(0, 0, sCanvas.width, sCanvas.height);
+      grad.addColorStop(0, '#fca5a5');
+      grad.addColorStop(0.5, '#f472b6');
+      grad.addColorStop(1, '#ec4899');
+      sCtx.fillStyle = grad;
+      sCtx.fillRect(0, 0, sCanvas.width, sCanvas.height);
+
+      sCtx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+      sCtx.font = 'bold 15px Quicksand, sans-serif';
+      sCtx.textAlign = 'center';
+      sCtx.fillText('✨ CÀO LỚP NHŨ ĐỂ MỞ QUÀ ✨', sCanvas.width / 2, sCanvas.height / 2);
+      sCtx.font = '11px Quicksand, sans-serif';
+      sCtx.fillText('Chạm hoặc rê chuột để cào nhẹ nhàng', sCanvas.width / 2, sCanvas.height / 2 + 22);
+    }
+
+    function scratchAt(x, y) {
+      if (isRevealed) return;
+      sCtx.globalCompositeOperation = 'destination-out';
+      sCtx.beginPath();
+      sCtx.arc(x, y, 22, 0, Math.PI * 2);
+      sCtx.fill();
+
+      const imgData = sCtx.getImageData(0, 0, sCanvas.width, sCanvas.height);
+      let trans = 0;
+      for (let i = 3; i < imgData.data.length; i += 16) {
+        if (imgData.data[i] === 0) trans++;
+      }
+      if (trans / (imgData.data.length / 16) > 0.4) {
+        revealVoucherFully();
+      }
+    }
+
+    function revealVoucherFully() {
+      if (isRevealed) return;
+      isRevealed = true;
+      sCanvas.style.opacity = '0';
+      sCanvas.style.pointerEvents = 'none';
+      confetti({ particleCount: 45, spread: 60, origin: { y: 0.7 } });
+    }
+
+    function getPointerPos(e) {
+      const rect = sCanvas.getBoundingClientRect();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: cx - rect.left, y: cy - rect.top };
+    }
+
+    sCanvas.addEventListener('mousedown', (e) => { isDrawing = true; const p = getPointerPos(e); scratchAt(p.x, p.y); });
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+    sCanvas.addEventListener('mousemove', (e) => { if (isDrawing) { const p = getPointerPos(e); scratchAt(p.x, p.y); } });
+
+    sCanvas.addEventListener('touchstart', (e) => { isDrawing = true; const p = getPointerPos(e); scratchAt(p.x, p.y); }, { passive: true });
+    window.addEventListener('touchend', () => { isDrawing = false; });
+    sCanvas.addEventListener('touchmove', (e) => { if (isDrawing) { const p = getPointerPos(e); scratchAt(p.x, p.y); } }, { passive: true });
+
+    document.getElementById('quickScratchBtn').addEventListener('click', revealVoucherFully);
+    document.getElementById('changeVoucherBtn').addEventListener('click', () => {
+      pickRandomVoucher();
+      initScratchCard();
+    });
+
+    pickRandomVoucher();
+  </script>
+</body>
+</html>
